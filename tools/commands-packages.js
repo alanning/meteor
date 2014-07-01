@@ -50,7 +50,7 @@ var getReleaseOrPackageRecord = function(name) {
 var checkAuthorizedPackageMaintainer = function (record, action) {
   var authorized = _.indexOf(
       _.pluck(record.maintainers, 'username'), auth.loggedInUsername());
-  if (authorized == -1) {
+  if (authorized == -1 &&  record.name.split(':').length > 1) {
       process.stderr.write('You are not an authorized maintainer of ' + record.name + ".\n");
       process.stderr.write('Only authorized maintainers may ' + action + ".\n");
       return 1;;
